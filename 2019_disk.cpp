@@ -79,8 +79,6 @@ void adj(){
 
         if(count==0) return;
         float avg=(float)sum/count;
-        cout<<"sum: "<<sum<<",count: "<<count<<"\n";
-        cout<<"AVG: "<<avg<<"\n";
         for(int i=1;i<=N;++i){
             for(int j=0;j<M;++j){
                 if(disk[i][j]==0)continue;
@@ -92,14 +90,6 @@ void adj(){
                 }
             }
         }
-    }
-}
-void printDisk(){
-    for(int i=1;i<=N;++i){
-        for(int j=0;j<M;++j){
-            cout<<disk[i][j]<<" ";
-        }
-        cout<<"\n";
     }
 }
 int sumDisk(){
@@ -117,19 +107,8 @@ int main(void){
     for(int testcase=0;testcase<Test;++testcase){
         read();
         for(int t=1;t<=T;++t){
-            cout<<"TEST:"<<testcase<<"-"<<t<<"\n";
-            
-            cout<<"Before\n";
-            printDisk();
-
             rotate(t);
-            cout<<"after rotate:\n";
-            printDisk();
             adj();
-
-            cout<<"after adj:\n";
-            printDisk();
-            cout<<"\n";
         }
         cout<<"#"<<testcase<<" "<<sumDisk()<<"\n";
     }
