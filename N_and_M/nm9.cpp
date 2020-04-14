@@ -18,11 +18,11 @@ Output
 sample_input.txt
 3
 3 1
-4 5 2
-4 2
-9 8 7 1
+4 4 2
+4 3
+9 7 7 1
 4 4
-1231 1232 1233 1234
+1 1 1 1
 */
 #include <iostream>
 #include <algorithm>
@@ -32,10 +32,8 @@ int N,M;
 const int maxN=8;
 const int maxM=8;
 int input[maxN];
-int input2[maxN];
 int output[maxM];
-int N2;
-int Ncount[maxN];
+bool visit[maxN];
 
 void read(){
     cin>>N>>M;
@@ -46,22 +44,9 @@ void read(){
 void init(){
     
     sort(input, input+N);
-
     for(int i=0;i<N;++i){
-        Ncount[i]=0;
+        visit[i]=false;
     }
-    input2[0]=input[0];
-    int idx=0;
-    Ncount[0]=1;
-    for(int i=1;i<N;++i){        
-        if(input2[idx]==input[i]){ 
-            Ncount[idx]++;
-            continue;
-        }
-        input2[++idx]=input[i];
-        Ncount[idx]=1;
-    }
-    N2=idx+1;
 }
 void printResult(){
     for(int i=0;i<M;++i){
@@ -75,12 +60,14 @@ void solve(int count){
         printResult();
         return;
     }
-    for(int i=0;i<N2;++i){
-        if(Ncount[i]==0)continue;
-        output[count]=input2[i];
-        Ncount[i]--;
+    int pre=-1;
+    for(int i=0;i<N;++i){
+        if(visit[i] || pre==input[i])continue;
+        output[count]=input[i];
+        visit[i]=true;
+        pre=input[i];
         solve(count+1);
-        Ncount[i]++;
+        visit[i]=false;
     }
 
 }
