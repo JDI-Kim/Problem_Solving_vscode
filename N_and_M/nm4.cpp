@@ -1,12 +1,15 @@
 /*
-BOJ #15651. N과 M (3) 순서 상관 없이(집합) 중복가능 뽑기
+BOJ #15649. N과 M (4) 시작인덱스고려한 중복허용뽑기
 자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.
+
 - 1부터 N까지 자연수 중에서 M개를 고른 수열
 - 같은 수를 여러 번 골라도 된다.
+- 고른 수열은 비내림차순이어야 한다.
+    길이가 K인 수열 A가 A1 ≤ A2 ≤ ... ≤ AK-1 ≤ AK를 만족하면, 비내림차순이라고 한다.
 
 Imput
 - 첫째 줄에 테스트케이스 개수 T가 주어진다
-- 둘째 줄부터 T줄만큼 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 7)
+- 둘째 줄부터 T줄만큼 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)
 
 Output
 - # 테스트케이스 숫자로 시작한다
@@ -17,36 +20,54 @@ sample_input.txt
 3
 3 1
 4 2
-4 4
+3 3
 */
 #include <iostream>
 using namespace std;
+#define ARRMODE 1;
 int N,M;
-const int maxN=7+1;
-const int maxM=7+1;
+const int maxN=8+1;
+const int maxM=8+1;
 char arr[maxM*2];
+int num[maxM];
 
 void read(){
     cin>>N>>M;
 }
 void init(){
-    for(int i=0;i<M*2;++i){ //여기가 자꾸 문제
+#ifdef ARRMODE
+    for(int i=0;i<2*M;++i){
         arr[i]=' ';
     }
+
+#else
+    for(int i=0;i<M;++i){
+        num[i]=0;
+    }
+#endif
 }
 void printResult(){
+#ifdef ARRMODE
     cout<<arr<<"\n";
+#else
+    for(int i=0;i<M;++i){
+        cout<<num[i]<<" ";
+    }
+    cout<<"\n";
+#endif
 }
-void solve(int count){
+void solve(int count,int startI){
     if(count==M){
         printResult();
         return;
     }
-
-    for(int i=1;i<=N;++i){
+    for(int i=startI;i<=N;++i){
+#ifdef ARRMODE
         arr[count*2]=i+'0';
-        solve(count+1);
-
+#else
+        num[count]=i;
+#endif
+        solve(count+1,i);
     }
 }
 int main(void){
@@ -58,7 +79,7 @@ int main(void){
         read();
         init();
         cout<<"#"<<test<<"\n";
-        solve(0);
+        solve(0,1);
 
     }
     return 0;
