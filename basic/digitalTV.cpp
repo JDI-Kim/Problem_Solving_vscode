@@ -1,3 +1,6 @@
+/*
+    BOJ #2816. 디지털티비
+*/
 #include <iostream>
 #include <string>
 using namespace std;
