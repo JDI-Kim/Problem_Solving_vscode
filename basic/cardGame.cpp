@@ -1,3 +1,6 @@
+/*
+    BOJ #2621. 카드게임
+*/
 #include <iostream>
 #include <algorithm>
 
@@ -75,33 +78,26 @@ int solve(){
     if(n_state[4]>0){
         return  n_state[4]+800;
     }
-    if(n_state[3]>0 && n_state[2]>0){
+    if(n_state[3]>0 && n_state[2]>0){    //3장의 숫자 같고 2장의 숫자 같은 경우
+
        return n_state[3]*10+n_state[2]+700;
     }
-    if(c_state){
+    if(c_state){//5장 같은 색인경우
         return n[4]+600;
     }
-    if(isCont){
+    if(isCont){//5장 연속인경우
         return n[4]+500;
     }
-    if(n_state[3]>0){
+    if(n_state[3]>0){//3장의 숫자같고 2장의 숫자는 다른 경우
         return n_state[3]+400;
     }
-    if(n_state[0]>0){
+    if(n_state[0]>0){ //2장의 숫자같고 2장의 숫자 같은 경우
         return max(n_state[0],n_state[2])*10+min(n_state[0],n_state[2])+300;
     }
-    if(n_state[2]>0){
+    if(n_state[2]>0){//2장의 숫자 같은 경우
         return n_state[2]+200;
     }
-    return n[4]+100;
-    //3장의 숫자 같고 2장의 숫자 같은 경우
-    //5장 같은 색인경우
-    //5장 연속인경우
-    //3장의 숫자같고 2장의 숫자는 다른 경우
-    //2장의 숫자같고 2장의 숫자 같은 경우
-    //2장의 숫자 같은 경우
-    //어느것도 아닌 경우
-    
+    return n[4]+100;//어느것도 아닌 경우
     
 }
 
