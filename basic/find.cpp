@@ -21,20 +21,30 @@ void init(){
     result_column=0;
 }
 void solve(){
+    bool count=true;
     for(int i=0;i<N;++i){
+        count=true;
         for(int j=0;j<N-1;++j){
-            if(room[i][j]=='.'&&room[i][j+1]=='.')
+            if(count&&room[i][j]=='.'&&room[i][j+1]=='.')
             {
                 result_row++;
-                while(room[i][j]=='.'&&j<N-1) ++j;
+                count=false;
+            }
+            if(room[i][j]=='X'){
+                count=true;
             }
         }
     }
+   
     for(int j=0;j<N;++j){
+         count=true;
         for(int i=0;i<N-1;++i){
-            if(room[i][j]=='.'&&room[i+1][j]=='.'){
-            result_column++;
-            while(room[i][j]=='.'&&i<N-1) ++i;
+            if(count&&room[i][j]=='.'&&room[i+1][j]=='.'){
+                result_column++;
+                count=false;
+            }
+            if(room[i][j]=='X'){
+                count=true;
             }
         }
     }
