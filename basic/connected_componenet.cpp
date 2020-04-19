@@ -1,3 +1,6 @@
+/*
+BOJ #11724 연결 요소의 개수
+*/
 #include <iostream>
 using namespace std;
 int N,M;
