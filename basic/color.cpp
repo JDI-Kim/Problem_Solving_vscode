@@ -1,3 +1,8 @@
+/*
+    BOJ #10026  적록색약
+    ** nI>=N 입니당 nI>N 아니고. 인덱스 범위 확인 확실히 할 것.
+ */
+
 #include <iostream>
 using namespace std;
 
@@ -31,7 +36,7 @@ void area(int i, int j, char c){
     for(int d=0;d<4;++d){
         int nI=i+dy[d];
         int nJ=j+dx[d];
-        if(nI<0 ||nI>N ||nJ<0 ||nJ>N) continue;
+        if(nI<0 ||nI>=N ||nJ<0 ||nJ>=N) continue;
         if(grid[nI][nJ]!=c) continue;
         if(visit[nI][nJ]) continue;
        visit[nI][nJ]=true;
@@ -42,7 +47,7 @@ void areaRG(int i, int j){
     for(int d=0;d<4;++d){
         int nI=i+dy[d];
         int nJ=j+dx[d];
-        if(nI<0 ||nI>N ||nJ<0 ||nJ>N) continue;
+        if(nI<0 ||nI>=N ||nJ<0 ||nJ>=N) continue; // nI>=N 입니당 nI>N 아니고. 범위 확인 확실히 할 것.
         if(grid[nI][nJ]=='B') continue;
         if(visit[nI][nJ]) continue;
        visit[nI][nJ]=true;
