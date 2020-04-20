@@ -1,6 +1,6 @@
 /*
     BOJ #2667. 단지나누기 DFS
-    
+     ** 입력이 빈칸으로 띄워져있지 않은 경우를 주의해야 함.
 */
 #include<iostream>
 #include<algorithm>
