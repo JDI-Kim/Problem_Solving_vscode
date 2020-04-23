@@ -1,7 +1,7 @@
-1
-5 7
-WLLWWWL
-LLLWLLL
-LWLWLWW
-LWLWLLL
-WLLWLWW
+3
+4 6
+a t c i s w
+4 6
+a e i o u s
+4 6
+a e i o w s
