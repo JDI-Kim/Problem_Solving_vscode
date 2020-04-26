@@ -11,58 +11,42 @@ using namespace std;
 int N;
 const int maxN=100001;
 int maxNewCrew;
-typedef struct{
-    int doc, interview;
-    bool check;
-}info;
-info input[maxN];
 int orderDoc[maxN];
 int orderItv[maxN];
-bool operator<(info a, info b){
-    return a.doc<b.doc;
-}
+
 void init(){
     maxNewCrew=N;
-    for(int i=0;i<N;++i){
-        input[i].check=true;
-    }
 }
 void read(){
     cin>>N;
     init();
+    int D,I;
     for(int i=0;i<N;++i){
-        cin>>input[i].doc>>input[i].interview;
-        orderDoc[input[i].doc]=i;
-        orderItv[input[i].interview]=i;
+        cin>>D>>I;
+        orderDoc[D]=I;
+        orderItv[I]=D;
     }
 }
 void solve(){
-    int docOrderofFirstItv=input[orderItv[1]].doc;
-    int itvOrderofFirstDoc=input[orderDoc[1]].interview;
-    if(docOrderofFirstItv<itvOrderofFirstDoc){
-        maxNewCrew=docOrderofFirstItv;
-        int minOrder=N+1;
-        for(int i=1;i<docOrderofFirstItv;++i){
-            int order=input[orderDoc[i]].interview;
-            if(minOrder>order){
-                minOrder=order;
+    int minOrder=N+1;
+    if(orderDoc[1]<orderItv[1]){
+        maxNewCrew=orderDoc[1];
+        for(int i=1;i<orderDoc[1];++i){
+            if(orderItv[i]<minOrder){
+                minOrder=orderItv[i];
                 continue;
             }
             maxNewCrew--;
         }
-
     }else{
-        maxNewCrew=itvOrderofFirstDoc;
-        int minOrder=N+1;
-        for(int i=1;i<itvOrderofFirstDoc;++i){
-            int order=input[orderItv[i]].doc;
-            if(minOrder>order){
-                minOrder=order;
+        maxNewCrew=orderItv[1];
+        for(int i=1;i<orderItv[1];++i){
+            if(orderDoc[i]<minOrder){
+                minOrder=orderDoc[i];
                 continue;
             }
             maxNewCrew--;
         }
-
     }
 }
 int main(void){
