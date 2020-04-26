@@ -27,26 +27,24 @@ void read(){
         orderItv[I]=D;
     }
 }
+void countN(int* order, int limit){
+    int minOrder=N+1;
+    maxNewCrew=limit;
+    for(int i=1;i<limit;++i){
+        if(order[i]<minOrder){
+            minOrder=order[i];
+            continue;
+        }
+        maxNewCrew--;
+    }
+}
 void solve(){
     int minOrder=N+1;
     if(orderDoc[1]<orderItv[1]){
-        maxNewCrew=orderDoc[1];
-        for(int i=1;i<orderDoc[1];++i){
-            if(orderItv[i]<minOrder){
-                minOrder=orderItv[i];
-                continue;
-            }
-            maxNewCrew--;
-        }
+        countN(orderItv,orderDoc[1]);
     }else{
-        maxNewCrew=orderItv[1];
-        for(int i=1;i<orderItv[1];++i){
-            if(orderDoc[i]<minOrder){
-                minOrder=orderDoc[i];
-                continue;
-            }
-            maxNewCrew--;
-        }
+        countN(orderDoc,orderItv[1]);
+
     }
 }
 int main(void){
