@@ -1,6 +1,7 @@
 /*
-    BOJ #3649 로봇프로젝트 *테스트케이스 갯수가 주어지지 않은 경우 while(cin>>a)를 쓰면됨
-    *정렬과 이진탐색. 절반인 값이 들어왔을 때 대처
+    BOJ #3649 로봇프로젝트 *예외처리로 개선한 코드 예외처리시 false인 경우만 걸러낼 것!
+    *테스트케이스 갯수가 주어지지 않은 경우 while(cin>>a)를 쓰면됨
+    *정렬과 이진탐색. 
 */
 #include <iostream>
 #include <algorithm>
@@ -44,7 +45,9 @@ bool search(int goal,int first, int last){
 bool solve(){
     int goal;
     if(n==0) return false;
-   
+    //if(l1[cnt1-1]+l2[cnt2-1]==x) {ans1=l1[cnt1-1]; ans2=l2[cnt2-1];return true;} //false인 경우만 걸러낼 것
+    if(l1[cnt1-1]+l2[cnt2-1]<x) return false;
+    if(l1[0]+l2[0]>x)return false;
     for(int i=0;i<cnt1;++i){
         goal=x-l1[i];
         if(search(goal,0,cnt2-1)){
