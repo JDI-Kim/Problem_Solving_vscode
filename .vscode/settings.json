@@ -6,6 +6,7 @@
         "algorithm": "cpp",
         "iosfwd": "cpp",
         "string_view": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "vector": "cpp"
     }
 }
