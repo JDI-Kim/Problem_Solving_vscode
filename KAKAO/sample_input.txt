@@ -1,6 +1,3 @@
-5
-aabbaccc
-ababcdcdababcdcd
-abcabcdede
-abcabcabcabcdededededede
-xababcdcdababcdcd
+2
+(()())()
+()))((()
