@@ -1,5 +1,5 @@
 /*
-    [programmers] 2017 카카오코드 본선 * DFS
+    [programmers] 2017 카카오코드 본선 * DFS **가지치기 추가
     출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
 */
 #include <iostream>
@@ -54,6 +54,7 @@ bool checkCondition(){
     int sz=INFO.size();
     for(int i=0;i<sz;++i){
         info I=INFO[i];
+        if(pos[I.n1]==-1 || pos[I.n2]==-1) continue;
         int D = abs(pos[I.n1]-pos[I.n2])-1;
         if(I.op=='<'){
             if(D>=I.dis) return false;
@@ -70,7 +71,7 @@ bool checkCondition(){
 }
 void allCase(int count){
     if(count==maxF){
-        if(checkCondition()) num++;
+        num++;
         return;
     }
     for(int i=0;i<maxF;++i){
@@ -78,7 +79,7 @@ void allCase(int count){
         visit[i]=true;
         pos[i]=count;
         seat[count]=i;
-        allCase(count+1);
+        if(checkCondition()) allCase(count+1);
         pos[i]=-1;
         visit[i]=false;
     }    
