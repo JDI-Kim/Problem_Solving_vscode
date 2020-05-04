@@ -1,5 +1,5 @@
 /*
-    [programmers] 2018 KAKAO BLIND RECRUITMENT [1차] 뉴스 클러스터링
+    [programmers] 2018 KAKAO BLIND RECRUITMENT [1차] 뉴스 클러스터링 **중복체크
     출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
 */
 
@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
@@ -27,6 +28,7 @@ void init(){
             cnt[1][i][j]=0;
         }
     }
+    
 }
 int check(char c){
     if('A'<=c && c<='Z') return c - 'A';
