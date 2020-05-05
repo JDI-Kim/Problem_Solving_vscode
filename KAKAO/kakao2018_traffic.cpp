@@ -1,52 +1,92 @@
 /*
-    [programmers] 2017 카카오코드 예선 보행자 천국
+    [programmers] 2018 KAKAO BLIND RECRUITMENT [1차] 추석 트래픽
     출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
 */
+#include <iostream>
+#include <string>
 #include <vector>
 
 using namespace std;
+// S T 2000개
+// 시작:S-(T-1) 끝: S
+//T:1~3000
+typedef struct{
+    int ST;
+    int ET;
+}info;
 
-int MOD = 20170805;
+void calculateTimes(info &in, string &s){
+    //2016-09-15 21:00:00.966 0.381s
+    //012345678901234567890123456789
+    //2016-09-15 01:00:07.000 2s
+    int HH = (s[11]-'0')*10 + (s[12]-'0');   
+    int MM = (s[14]-'0')*10 + (s[15]-'0');   
+    int SS = (s[17]-'0')*10 + (s[18]-'0');   
+    int SSS = (s[20]-'0')*100 + (s[21]-'0')*10 + (s[22]-'0');   
+    
+    int T = s[24]-'0';
+    int TTT = 0;
+    if(s[25]=='s') TTT=0;
+    else if(s[27]=='s') TTT = (s[26]-'0')*100;
+    else if(s[28]=='s') TTT = (s[26]-'0')*100 + (s[27]-'0')*10;
+    else if(s[29]=='s') TTT = (s[26]-'0')*100 + (s[27]-'0')*10 + (s[28]-'0');
+    
 
-int solution(int m, int n, vector<vector<int>> city_map) {
+    int ET = ((HH*60+MM)*60+SS)*1000+SSS;
+    int time = T*1000+TTT;
+    int ST = ET-(time-1);
+    in.ST=ST; in.ET=ET;
+    
+
+}
+void cntCase(int st, int et, vector<info> &I, int &answer){
+    int sz= I.size();
+    int cnt=0;
+
+    for(int i=0;i<sz;++i){
+        if(I[i].ET<st) continue;
+        if(et<I[i].ST) continue;
+        cnt++;
+    }
+    if(answer<cnt)answer=cnt;
+}
+int solution(vector<string> lines) {
+    //cout<<"\n\nSTART\n";
     int answer = 0;
-    vector<vector<int>> cnt;
-    for(int i=0;i<m;++i){
-        vector<int> v;
-        for(int j=0;j<n;++j){
-            v.push_back(0);
-        }
-        cnt.push_back(v);
+    int szL= lines.size();
+    vector<info> I;
+    for(int i=0;i<szL;++i){
+       // cout<<i<<": ";
+        info temp;
+        calculateTimes(temp,lines[i]);
+        I.push_back(temp);
+       // cout<<I[i].ST<<"~"<<I[i].ET<<"\n";
     }
-    for(int i=0;i<m;++i){
-       //첫번째 줄1이 나올때까지 1을 넣는다
-        if(city_map[i][0]==1)break;
-        cnt[i][0]=1;
+    int szI=I.size();
+    int cnt=0;
+    for(int i=0;i<szI;++i){
+        cntCase( I[i].ST-999,  I[i].ST, I, answer);
+        cntCase( I[i].ST,      I[i].ST+999, I, answer);
+        cntCase( I[i].ET-999,  I[i].ET, I, answer);
+        cntCase( I[i].ET,      I[i].ET+999, I, answer);
     }
-    for(int j=0;j<n;++j){
-        if(city_map[0][j]==1)break;
-        cnt[0][j]=1;
-    }
-    for(int i=1;i<m;++i){
-        for(int j=1;j<n;++j){
-            if(city_map[i][j]==1) {cnt[i][j]=0;continue;}
-            int left=0; int up=0;
-            if(city_map[i][j-1]!=2){left=cnt[i][j-1];}
-            else{
-                for(int k=j-2;k>=0;--k){
-                    if(city_map[i][k]!=2){ left=cnt[i][k];break;}
-                }
-            }
-            if(city_map[i-1][j]!=2){up=cnt[i-1][j];}
-            else{
-                for(int k=i-2;k>=0;--k){
-                    if(city_map[k][j]!=2){ up=cnt[k][j];break;}
-                }
-            }
-            cnt[i][j]=left+up;   
-            if(cnt[i][j]>=MOD) cnt[i][j]%=MOD;
-        }
-    }
-    answer=cnt[m-1][n-1];
     return answer;
+}
+int main(void){
+    int T;
+    cin>>T;
+    for(int test=1;test<=T;++test){
+        cout<<"#"<<test<<"\n";
+        int n;
+        cin>>n;
+        vector<string> lines;
+        string str1,str2,str3;
+        for(int i=0;i<n;++i){       
+            cin>>str1>>str2>>str3;
+            lines.push_back(str1+" "+str2+" "+str3);
+            
+        }
+        cout<<"ANS : "<<solution(lines)<<"\n";
+    }
+    return 0;
 }
