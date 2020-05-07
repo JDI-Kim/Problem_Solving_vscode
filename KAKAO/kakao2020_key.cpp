@@ -1,5 +1,9 @@
 /*
-
+    [programmers] 2020 KAKAO BLIND RECRUITMENT 자물쇠와 열쇠 
+    * 열쇠 바깥에 홈이 있는 경우도 생각해야됨.
+    * 로테이션 할때 인덱스 주의
+    * translation 가능한 범위 주의
+    출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
 */
 #include<iostream>
 #include <string>
