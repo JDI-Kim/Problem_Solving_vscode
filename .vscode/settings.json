@@ -8,6 +8,7 @@
         "string_view": "cpp",
         "queue": "cpp",
         "vector": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "set": "cpp"
     }
 }
