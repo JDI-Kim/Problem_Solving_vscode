@@ -9,6 +9,8 @@
         "queue": "cpp",
         "vector": "cpp",
         "string": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp"
     }
 }
